@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Auction.Models;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 
 namespace Auction.Controllers
 {
@@ -26,7 +27,7 @@ namespace Auction.Controllers
             return View("Register");
         }
 
-                [HttpGet]
+        [HttpGet]
         [Route("login")]
         public IActionResult LoginPage()
         {
@@ -57,15 +58,14 @@ namespace Auction.Controllers
                     return View("Register");
                 }
                 // Password hashing
-                // PasswordHasher<RegisterViewModel> Hasher = new PasswordHasher<RegisterViewModel>();
-                // NewUser.Password = Hasher.HashPassword(NewUser, NewUser.Password);
+                PasswordHasher<RegisterViewModel> Hasher = new PasswordHasher<RegisterViewModel>();
+                NewUser.Password = Hasher.HashPassword(NewUser, NewUser.Password);
                 // Adding the created User Object to the DB
                 User user = new User
                 {
                     FirstName = NewUser.FirstName,
                     LastName = NewUser.LastName,
                     Email = NewUser.Email,
-                    AccountType = NewUser.AccountType,
                     Password = NewUser.Password,
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now
@@ -93,10 +93,10 @@ namespace Auction.Controllers
                 List<User> CheckUser = _context.Users.Where(theuser => theuser.Email == LEmail).ToList();
                 if (CheckUser.Count > 0)
                 {
+                    System.Console.WriteLine("===========================");
                     // Checking if the password matches
-                    // var Hasher  = new PasswordHasher<User>();
-                    // if(0 != Hasher.VerifyHashedPassword(CheckUser[0], CheckUser[0].Password, Password))
-                    if(CheckUser[0].Password == Password)
+                    var Hasher  = new PasswordHasher<User>();
+                    if(0 != Hasher.VerifyHashedPassword(CheckUser[0], CheckUser[0].Password, Password))
                     {
                         // If the checks are validated than save his ID and Name in session and redirect to the Dashboard page
                         HttpContext.Session.SetInt32("UserId", (int)CheckUser[0].UserId);

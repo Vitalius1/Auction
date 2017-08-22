@@ -21,9 +21,6 @@ namespace Auction.Models
         public string Email {get; set;}
 //------------------------------------------------------------------------------------
         [Required]
-        public string AccountType {get; set;}
-//------------------------------------------------------------------------------------
-        [Required]
         [DataType(DataType.Password)]
         [MinLength(8, ErrorMessage = "Must be at least 8 characters.")]
         public string Password {get; set;}

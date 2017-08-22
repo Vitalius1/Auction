@@ -5,6 +5,9 @@
 <div id="content">
 
     <form asp-controller="Register" asp-action="Create" method="post" class="form-container">
+        
+        <div><a href="http://localhost:8000">Want to become a seller?</a></div>
+        
         <div class="form-title"><h1>Register</h1></div>
         <a href="/login">Already registered?</a><br><br>
         
@@ -27,10 +30,6 @@
         <div class="form-title">Confirm Password</div>
         <input asp-for="ConfirmPassword" class="form-field"/>
         <span asp-validation-for="ConfirmPassword"></span>
-
-        <input type="radio" name="AccountType" value="buyer" checked><span class="form-title">Buyer</span>
-        <input type="radio" name="AccountType" value="seller"><span class="form-title">Seller</span>
-
 
         <div class="submit-container"><input type="submit" value="Submit" class="submit-button"/></div>
     </form>
