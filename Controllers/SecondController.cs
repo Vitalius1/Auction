@@ -23,26 +23,33 @@ namespace Auction.Controllers
         [Route("dashboard")]
         public IActionResult Index()
         {
+            var Products = new Dictionary<string, object>();
+            WebRequest.GetProductDataAsync(ApiResponse =>
+                {
+                    Products = ApiResponse;
+                }
+            ).Wait();
+            System.Console.WriteLine(Products);
             return View("Dashboard");
         }
 
 
-        [HttpGet]
-        [Route("pokemon/{pokeid}")]
-        public IActionResult QueryPoke(int pokeid)
-        {
-            var PokeInfo = new Dictionary<string, object>();
-            WebRequest.GetPokemonDataAsync(pokeid, ApiResponse =>
-                {
-                    PokeInfo = ApiResponse;
-                }
-            ).Wait();
-            // Other code
-            ViewBag.name = PokeInfo["name"];
-            ViewBag.height = PokeInfo["height"];
-            ViewBag.weight = PokeInfo["weight"];
+        // [HttpGet]
+        // [Route("pokemon/{pokeid}")]
+        // public IActionResult QueryPoke(int pokeid)
+        // {
+        //     var PokeInfo = new Dictionary<string, object>();
+        //     WebRequest.GetPokemonDataAsync(pokeid, ApiResponse =>
+        //         {
+        //             PokeInfo = ApiResponse;
+        //         }
+        //     ).Wait();
+        //     // Other code
+        //     ViewBag.name = PokeInfo["name"];
+        //     ViewBag.height = PokeInfo["height"];
+        //     ViewBag.weight = PokeInfo["weight"];
 
-            return View("Pokemon");
-        }
+        //     return View("Pokemon");
+        // }
     }
 }

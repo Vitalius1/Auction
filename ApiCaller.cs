@@ -10,14 +10,14 @@ namespace Auction
     {
         // The second parameter is a function that returns a Dictionary of string keys to object values.
         // If an API returned an array as its top level collection the parameter type would be "Action>"
-        public static async Task GetPokemonDataAsync(int PokeId, Action<Dictionary<string, object>> Callback)
+        public static async Task GetProductDataAsync(Action<Dictionary<string, object>> Callback)
         {
             // Create a temporary HttpClient connection.
             using (var Client = new HttpClient())
             {
                 try
                 {
-                    Client.BaseAddress = new Uri($"http://pokeapi.co/api/v2/pokemon/{PokeId}");
+                    Client.BaseAddress = new Uri($"http://localhost:8000/allproducts");
                     HttpResponseMessage Response = await Client.GetAsync(""); // Make the actual API call.
                     Response.EnsureSuccessStatusCode(); // Throw error if not successful.
                     string StringResponse = await Response.Content.ReadAsStringAsync(); // Read in the response as a string.
