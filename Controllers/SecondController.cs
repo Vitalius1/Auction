@@ -25,11 +25,11 @@ namespace Auction.Controllers
         [Route("dashboard")]
         public IActionResult Index()
         {
-            // if (HttpContext.Session.GetInt32("UserId") == null)
-            // {
-            //     TempData["NiceTry"] = "You need to be logged in to view account info!";
-            //     return RedirectToAction("LoginPage", "Register");
-            // }
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                TempData["NiceTry"] = "You need to be logged in to view account info!";
+                return RedirectToAction("LoginPage", "Register");
+            }
             var Products = new List<Dictionary<string, object>>();
             WebRequest.GetProductDataAsync(ApiResponse =>
                 {
@@ -45,11 +45,11 @@ namespace Auction.Controllers
         [Route("getProduct/{id}")]
         public IActionResult OneProduct(int id)
         {
-            // if (HttpContext.Session.GetInt32("UserId") == null)
-            // {
-            //     TempData["NiceTry"] = "You need to be logged in to view account info!";
-            //     return RedirectToAction("LoginPage", "Register");
-            // }
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                TempData["NiceTry"] = "You need to be logged in to view account info!";
+                return RedirectToAction("LoginPage", "Register");
+            }
             var ProductInfo = new Dictionary<string, object>();
             WebRequest.SingleProductAsync(id, ApiResponse =>
                 {
