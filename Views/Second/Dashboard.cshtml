@@ -1,7 +1,37 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<a href="/logout">Logout</a>
 
-<h1>Success</h1>
-<a href="/pokemon/1">Go pokemon</a>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
+      <li><a href="/dashboard">Home</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <!-- <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
+      <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div id="search-box">
+  <h1>Filters</h1>
+  
+</div>
+
+<div id="all">
+    <div id="list">
+        @{
+            foreach(var p in ViewBag.Products)
+            {
+                <div class="prod">
+                    <a href='/getPrduct/@p["id"]'><img src='@p["photo"]' alt="Picture">
+                    <h4>@p["product_name"]</h4></a>
+                    <h6>End Date:</h6>
+                    <h5 style="color:red">@DateTime.Parse(p["product_end_date"]).ToString("MMM dd, yyyy HH:mm")</h5>
+                    <h2>@p["product_starting_bid"]</h2 style="color:red">
+                </div>
+            }
+        }
+    </div>
+</div>
