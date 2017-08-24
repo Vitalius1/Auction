@@ -43,7 +43,7 @@ namespace Auction.Controllers
 
         [HttpGet]
         [Route("getProduct/{id}")]
-        public IActionResult Index(int id)
+        public IActionResult OneProduct(int id)
         {
             // if (HttpContext.Session.GetInt32("UserId") == null)
             // {
