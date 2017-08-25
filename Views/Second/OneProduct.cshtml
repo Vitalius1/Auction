@@ -5,10 +5,38 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <ul class="nav navbar-nav">
-      <li><a href="/dashboard">Home</a></li>
+      <li><a href="/dashboard/1">Home</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
+      <li><a href="http://54.214.115.138/login"><span class="glyphicon glyphicon-user"></span> Become a Seller</a></li>
       <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
     </ul>
   </div>
 </nav>
+
+<div id="one-product">
+    <img src='@ViewBag.Product["photo"]' alt="Picture" width="500px" height="auto">
+</div>
+
+<div id="product-name">
+    <h3>@ViewBag.Product["product_name"]</h3>
+</div>
+
+<div id="end-date">
+    <h3>End Date: <span style="color:red">@DateTime.Parse(ViewBag.Product["product_end_date"]).ToString("MMM dd, yyyy HH:mm")</span></h3>
+</div>
+
+<div id="product-bid">
+    <h1>Current top bid: $@ViewBag.Product["product_starting_bid"]</h1>
+</div>
+
+<div id="product-description">
+    <h5>Product Description:</h5>
+    <p>@ViewBag.Product["product_description"]</p>
+</div>
+
+<div id="product-seller">
+    <h4>Seller: @ViewBag.Product["owner"]</h4>
+</div>
+
+<div style="height:400px"></div>

@@ -22,8 +22,8 @@ namespace Auction.Controllers
 
         // GET: /Home/
         [HttpGet]
-        [Route("dashboard")]
-        public IActionResult Index()
+        [Route("dashboard/{id}")]
+        public IActionResult Index(int id = 1)
         {
             if (HttpContext.Session.GetInt32("UserId") == null)
             {
@@ -31,7 +31,7 @@ namespace Auction.Controllers
                 return RedirectToAction("LoginPage", "Register");
             }
             var Products = new List<Dictionary<string, object>>();
-            WebRequest.GetProductDataAsync(ApiResponse =>
+            WebRequest.GetProductDataAsync(id, ApiResponse =>
                 {
                     Products = ApiResponse;
                 }
@@ -39,7 +39,7 @@ namespace Auction.Controllers
             ViewBag.Products = Products;
             return View("Dashboard");
         }
-
+// ============================================================================================================
 
         [HttpGet]
         [Route("getProduct/{id}")]
@@ -56,6 +56,7 @@ namespace Auction.Controllers
                     ProductInfo = ApiResponse;
                 }
             ).Wait();
+            System.Console.WriteLine(ProductInfo["product_end_date"]);
             ViewBag.Product = ProductInfo;
             return View("OneProduct");
         }

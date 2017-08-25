@@ -76,7 +76,7 @@ namespace Auction.Controllers
                 User JustCreated = _context.Users.Single(theUser => theUser.Email == NewUser.Email);
                 HttpContext.Session.SetInt32("UserId", (int)JustCreated.UserId);
                 HttpContext.Session.SetString("UserName", (string)JustCreated.FirstName);
-                return RedirectToAction("Index", "Second");
+                return Redirect("/dashboard/1");
             }
             return View("Register");
         }
@@ -101,7 +101,7 @@ namespace Auction.Controllers
                         // If the checks are validated than save his ID and Name in session and redirect to the Dashboard page
                         HttpContext.Session.SetInt32("UserId", (int)CheckUser[0].UserId);
                         HttpContext.Session.SetString("UserName", (string)CheckUser[0].FirstName);
-                        return RedirectToAction("Index", "Second");
+                        return Redirect("/dashboard/1");
                     }
                 }
             }
