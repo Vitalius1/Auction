@@ -13,6 +13,11 @@
     </ul>
   </div>
 </nav>
+@{
+    string time = DateTime.Parse(ViewBag.Product["product_end_date"]).ToString("MM/dd/yyyy HH:mm:ss");
+}
+<div id="counter" data-countdown="@time"></div>
+
 
 <div id="one-product">
     <img src='@ViewBag.Product["photo"]' alt="Picture" width="500px" height="auto">

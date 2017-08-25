@@ -75,6 +75,15 @@ select{
     width: 100px;
     margin: 0px auto;
 }
+.cd{
+    font-weight: bolder;
+    color: royalblue;
+    font-size: 26px;
+}
+#counter{
+    color: royalblue;
+    font-size: 2.5em;
+}
 
 /* =================== Form Styling ================= */
 #content{
